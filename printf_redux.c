@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include <unistd.h>
 
 int ft_strlen(char *s)
 {
@@ -6,12 +7,6 @@ int ft_strlen(char *s)
     while (s[i] != '\0')
         ++i;
     return (i);
-}
-
-int char_conv(va_list args)
-{
-    write(1, va_arg(args, int), 1);
-    return (1);
 }
 
 int string_conv(va_list args)
@@ -32,9 +27,22 @@ int decimal_conv(va_list args)
     return (1);
 }
 
+int hex_conv(va_list args)
+{
+    //write(1, va_arg(args, int), 1);
+    
+    return (1);
+}
+
+int char_conv(va_list args)
+{
+    write(1, va_arg(args, int), 1);
+    return (1);
+}
+
 int percent_conv()
 {
-    char percent = '%';
+    char    percent = '%';
     write(1, &percent, 1);
     return (1);
 }
@@ -42,18 +50,21 @@ int percent_conv()
 int ft_convert(char c, va_list args)
 {
     int b = 0;
+
     if(c == 'c')
         b = char_conv(args);
+    else if(c == '%')
+        b = percent_conv();
     else if(c == 's')
         b = string_conv(args);
     else if(c == 'd' || c == 'i')
         b = decimal_conv(args);
-    else if(c == '%')
-        b = percent_conv();
+    else if(c == 'x' || c == 'X')
+        b = hex_conv(args);
     return (b);
 }
 
-int printf(char *format, ...)
+int printf_redux(char *format, ...)
 {
     va_list args;
     int     nc = 0;
@@ -62,7 +73,7 @@ int printf(char *format, ...)
     va_start(args, format);
     while( format[i] != '\0 ')
     {
-        if (format[i] == '%')
+        if (format[i] != '%')
         {
             write(1,format[i],1);
             ++nc;

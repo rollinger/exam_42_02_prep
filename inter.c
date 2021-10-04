@@ -1,3 +1,7 @@
+/*
+
+*/
+
 #include <unistd.h>
 
 char    *ft_strchr(char *s, char c)
