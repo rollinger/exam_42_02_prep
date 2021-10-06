@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 /* returns bytes of nullterm buffer */
 int ft_strlen(char *s)
@@ -69,20 +70,41 @@ int decimal_conv(va_list args)
 }
 
 /**/
-int ft_ntox(int nbr, char *buf)
+char    *ft_ntoa(unsigned int nbr, char *buf, char *base)
 {
-    char *base = "0123456789abcdef";
-    // TODO...
+    size_t	base_len;
+
+	base_len = ft_strlen(base);
+	if (base_len < 2 || !base)
+		return (NULL);
+	if (nbr < 0)
+	{
+		nbr *= -1;
+		*buf++ = '-';
+	}
+	if (nbr >= base_len)
+	{
+		buf = ft_ntoa(nbr / base_len, buf, base);
+		buf = ft_ntoa(nbr % base_len, buf, base);
+	}
+	else
+		*buf++ = base[nbr];
+	return (buf);
 }
 
 /* calls n to hex, prints it out and returns the bytes */
 int hex_conv(va_list args)
 {
-    char    hex_str[100];
-    int     nbr = va_arg(args, int);
+    char   *hex_str = malloc(sizeof(char) * 100);
+    int    nbr = va_arg(args, int);
+    int    hlen;
 
-	ft_ntox(nbr, hex_str);
-	return (write(1, hex_str, ft_strlen(hex_str)));
+	ft_ntoa(nbr, hex_str, "0123456789abcdef");
+    hlen = ft_strlen(hex_str);
+	write(1, hex_str, hlen);
+    free(hex_str);
+    return (hlen);
+
 }
 
 /* conversion flag switch; returns bytes */
@@ -98,7 +120,7 @@ int ft_convert(char c, va_list args)
         b = string_conv(args);
     else if(c == 'd' || c == 'i')
         b = decimal_conv(args);
-    else if(c == 'x' || c == 'X')
+    else if(c == 'x')
         b = hex_conv(args);
     return (b);
 }
