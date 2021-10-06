@@ -1,10 +1,10 @@
 /*
-
+Intersection: E is in A -AND- B
 */
 
 #include <unistd.h>
 
-char    *ft_strchr(char *s, char c)
+static char    *ft_strchr(char *s, char c)
 {
     while (*s != '\0')
     {
@@ -15,7 +15,7 @@ char    *ft_strchr(char *s, char c)
     return (0);
 }
 
-int has_dup(char *s, char c, int i)
+static int has_dup(char *s, char c, int i)
 {
     while(s[--i])
         if (s[i] == c)
@@ -23,7 +23,10 @@ int has_dup(char *s, char c, int i)
     return (0);
 }
 
-void inter(char *s1, char *s2)
+/*
+
+*/
+void ft_inter(char *s1, char *s2)
 {
     int i = 0;
     while(s1[i] != '\0')
@@ -35,14 +38,14 @@ void inter(char *s1, char *s2)
     return ;
 }
 
-int main(int argc, char **argv)
-{
-    if (argc != 3)
-        write(1, "\n", 1);
-    else
-    {
-        inter(argv[1], argv[2]);
-        write(1, "\n", 1);
-    }
-    return (1);
-}
+// int main(int argc, char **argv)
+// {
+//     if (argc != 3)
+//         write(1, "\n", 1);
+//     else
+//     {
+//         inter(argv[1], argv[2]);
+//         write(1, "\n", 1);
+//     }
+//     return (1);
+// }

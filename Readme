@@ -1,3 +1,21 @@
 https://github.com/gcamerli/examshell/blob/master/level2/inter/subject.en.txt
 
-https://github.com/gavinfielder/pft/wiki/Compatibility-with-Other-Systems
+inter.c         => Intersection
+    O.. write code
+    O optimize
+    O memorize
+union.c         => Union
+    O.. write code
+    O optimize
+    O memorize
+gnl_redux       => Reduced GetNextLine
+    O.. write code
+    O optimize
+    O memorize
+printf_redux    => Reduced Printf
+    O.. write code
+    O optimize
+    O memorize
+
+O Exam 1
+

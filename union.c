@@ -1,9 +1,9 @@
 /*
-
+Union: E is in A -OR- B
 */
 #include <unistd.h>
 
-char    *ft_strchr(char *s, char c)
+static char    *ft_strchr(char *s, char c)
 {
     while (*s != '\0')
     {
@@ -14,7 +14,7 @@ char    *ft_strchr(char *s, char c)
     return (0);
 }
 
-int has_dup(char *s, char c, int i)
+static int has_dup(char *s, char c, int i)
 {
     while(s[--i])
         if (s[i] == c)
@@ -42,14 +42,14 @@ void ft_union(char *s1, char *s2)
     }
 }
 
-int main(int argc, char **argv)
-{
-    if (argc != 3)
-        write(1, "\n", 1);
-    else
-    {
-        ft_union(argv[1], argv[2]);
-        write(1, "\n", 1);
-    }
-    return (1);
-}
+// int main(int argc, char **argv)
+// {
+//     if (argc != 3)
+//         write(1, "\n", 1);
+//     else
+//     {
+//         ft_union(argv[1], argv[2]);
+//         write(1, "\n", 1);
+//     }
+//     return (1);
+// }
